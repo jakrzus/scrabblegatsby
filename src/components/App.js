@@ -74,7 +74,7 @@ class App extends Component {
   handleClick() {
    
     const word = this.state.word
-    axios.get('http://localhost:3000/word/check?word=' + word)
+    axios.get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
     .then(function(resp) {
       console.log(resp.data);
        playable = resp.data

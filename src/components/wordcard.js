@@ -21,7 +21,7 @@ class WordChip extends Component {
       return (
         <div>
             
-         <Chip color={color} label={this.props.word.word} />
+         <Chip key={this.props.word}color={color} label={this.props.word.word} />
         </div>
       )
     }
