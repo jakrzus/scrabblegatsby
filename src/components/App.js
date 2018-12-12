@@ -7,9 +7,9 @@ import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import FlexView from 'react-flexview';
 import './layout.css';
-import Chip from '@material-ui/core/Chip';
 import NavBar from './appbar';
-import { AppBar } from '@material-ui/core';
+import WordCard from './wordcard'
+
  var playable;
 const styles = {
   card: {
@@ -62,7 +62,7 @@ class App extends Component {
               </FlexView>
             </FlexView>
           </Card>
-          <Card className="words-card"><Chip color={'primary'} label={'sdfsdfsdf'} /> </Card>
+          <WordCard  words={this.state.words}/>
         </FlexView>
       </div>
       </div>
@@ -84,7 +84,9 @@ class App extends Component {
       console.log(error)
     })
     console.log(playable)
-    this.setState({playable: playable})
+    const words = this.state.words
+    this.setState({playable: playable,
+    words: [...this.state.words,{word: word, playable: playable}]});
     
     this.setState({word: "" });
   }
