@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import FlexView from 'react-flexview';
 import './layout.css'
+import AppBar from '@material-ui/core/AppBar'
  var playable;
 const styles = {
   card: {
@@ -36,12 +37,14 @@ class App extends Component {
   }
   render() {
     return (
-     
+     <div>
+        <AppBar className="navbar" position="fixed">askdjfksdjf</AppBar>
       <div className="App center">
+          
       <FlexView hAlignContent="center">
         <Card >
         <FlexView  column hAlignContent="center">
-      <Nav/>  
+      <Nav className="paper"/>  
        <Input word={this.state.word} handleChange={this.handleChange}/>
         <p> {this.state.word} </p>
         <span>{this.state.word2}</span>
@@ -51,6 +54,7 @@ class App extends Component {
             </FlexView>
           </Card>
         </FlexView>
+      </div>
       </div>
     );
   }

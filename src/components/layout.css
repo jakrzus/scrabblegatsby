@@ -8,9 +8,18 @@ body {
 }
 .center{
   margin: auto;
+  margin-top: 3rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+.paper{
+  margin :1rem 1rem 1rem 1rem;
 }
 .button-search{
   padding-bottom: 12px;
+}
+.navbar{
+  height: 2rem;
 }
 article,
 aside,
