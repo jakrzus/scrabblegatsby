@@ -5,7 +5,8 @@ import ButtonSearch from './buttonsearch';
 import Nav from './Nav';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import FlexView from 'react-flexview';
+import './layout.css'
  var playable;
 const styles = {
   card: {
@@ -35,18 +36,21 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-      <Card>
-      <Nav/>
+     
+      <div className="App center">
+      <FlexView hAlignContent="center">
+        <Card >
+        <FlexView  column hAlignContent="center">
+      <Nav/>  
        <Input word={this.state.word} handleChange={this.handleChange}/>
         <p> {this.state.word} </p>
         <span>{this.state.word2}</span>
-        <ButtonSearch handleClick={this.handleClick} />
-        </Card>
-        </Grid>
-        </Grid>
+        <FlexView vAlignContent="center">
+          <ButtonSearch  handleClick={this.handleClick} />
+              </FlexView>
+            </FlexView>
+          </Card>
+        </FlexView>
       </div>
     );
   }

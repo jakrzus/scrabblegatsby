@@ -6,6 +6,12 @@ html {
 body {
   margin: 0;
 }
+.center{
+  margin: auto;
+}
+.button-search{
+  padding-bottom: 12px;
+}
 article,
 aside,
 details,
