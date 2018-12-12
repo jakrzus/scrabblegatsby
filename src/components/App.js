@@ -6,8 +6,10 @@ import Nav from './Nav';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import FlexView from 'react-flexview';
-import './layout.css'
-import AppBar from '@material-ui/core/AppBar'
+import './layout.css';
+import Chip from '@material-ui/core/Chip';
+import NavBar from './appbar';
+import { AppBar } from '@material-ui/core';
  var playable;
 const styles = {
   card: {
@@ -24,10 +26,16 @@ const styles = {
   pos: {
     marginBottom: 12,
   },
+  avatar: {
+    marginTop: 'auto',
+    overflow: 'visible'
+  }
 };
 class App extends Component {
+
   constructor(props){
     super(props);
+  
     this.state={
       word: "",
       words: []
@@ -36,12 +44,13 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
+   
     return (
      <div>
-        <AppBar className="navbar" position="fixed">askdjfksdjf</AppBar>
+        <NavBar />
       <div className="App center">
           
-      <FlexView hAlignContent="center">
+      <FlexView column hAlignContent="center">
         <Card >
         <FlexView  column hAlignContent="center">
       <Nav className="paper"/>  
@@ -53,6 +62,7 @@ class App extends Component {
               </FlexView>
             </FlexView>
           </Card>
+          <Card className="words-card"><Chip color={'primary'} label={'sdfsdfsdf'} /> </Card>
         </FlexView>
       </div>
       </div>

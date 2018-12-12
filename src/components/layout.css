@@ -8,7 +8,7 @@ body {
 }
 .center{
   margin: auto;
-  margin-top: 3rem;
+  margin-top: 5rem;
   margin-right: 2rem;
   margin-left: 2rem;
 }
@@ -19,7 +19,17 @@ body {
   padding-bottom: 12px;
 }
 .navbar{
-  height: 2rem;
+  min-height: 2rem;
+}
+.avatar{
+  margin-top: auto;
+  overflow: visible !important; 
+}
+.words-card{
+  margin: 2rem 2rem 2rem 2rem;
+  min-width: 300px;
+  min-height: 200px;
+  align-items: flex-start;
 }
 article,
 aside,
