@@ -3,6 +3,19 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+.loader{
+  content: 'Loading...';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+  height: 100%;
+   width: 100%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
 body {
   margin: 0;
 }

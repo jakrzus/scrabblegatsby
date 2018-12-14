@@ -1,25 +1,17 @@
 import React, {Component} from 'react'
 import { Link } from 'gatsby'
-import '../components/loader.css'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
 const SecondPage = () => (
   <Layout>
+    <div className={'loader'}></div>
     <SEO title="Page two" />
     <h1>Hi from the second page</h1>
     <p>Welcome to page 2</p>
     <Link to="/">Go back to the homepage</Link>
     <Forma />
-    <div class="holder">
-  <div class="flip-preloader example-1">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  </div>
+
   </Layout>
 )
 

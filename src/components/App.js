@@ -52,7 +52,7 @@ class App extends Component {
      <div>
         <NavBar />
       <div className="App center">
-        {/* {this.state.loading && <Loader />} */}
+         {this.state.loading && <div className={'loader'}>Sprawdzam...</div>}
       <FlexView column hAlignContent="center">
         <Card >
         <FlexView  column hAlignContent="center">
