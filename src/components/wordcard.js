@@ -11,8 +11,8 @@ import PropTypes from 'prop-types'
               this.props.words.map((word) => 
 
             <div>
-                  {word.playable && <WordChip word={word} />}
-                 
+                  {(word.playable || word.playable === false ) && <WordChip word={word} />}
+   
                 </div>
                 
                   )

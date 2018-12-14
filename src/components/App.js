@@ -9,6 +9,7 @@ import FlexView from 'react-flexview';
 import './layout.css';
 import NavBar from './appbar';
 import WordCard from './wordcard'
+import Loader from './loader'
 
 
  var playable;
@@ -39,7 +40,8 @@ class App extends Component {
   
     this.state={
       word: "",
-      words: []
+      words: [],
+      loading: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -50,7 +52,7 @@ class App extends Component {
      <div>
         <NavBar />
       <div className="App center">
-          
+        {/* {this.state.loading && <Loader />} */}
       <FlexView column hAlignContent="center">
         <Card >
         <FlexView  column hAlignContent="center">
@@ -75,15 +77,6 @@ class App extends Component {
   handleClick() {
     this.setState({loading: true})
     const word = this.state.word
-    // async function getJSONAsync(){
-
-    //   let json = axios.get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
-    //     return json;
-    //   };
-    //   let json = getJSONAsync();
-    //   console.log(json)
-    //   playable = json.data
-
 
      axios.get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
      .then((resp) =>{
@@ -104,9 +97,6 @@ class App extends Component {
      .catch(function (error) {
        console.log(error)
      })
-    
-    
-   // this.setState(prevState => {prevState.words.push({word: word, playable: playable})})
 
    
   }
