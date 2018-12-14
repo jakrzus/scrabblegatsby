@@ -10,6 +10,7 @@ import './layout.css';
 import NavBar from './appbar';
 import WordCard from './wordcard'
 
+
  var playable;
 const styles = {
   card: {
@@ -56,7 +57,6 @@ class App extends Component {
       <Nav className="paper"/>  
        <Input word={this.state.word} handleChange={this.handleChange}/>
         <p> {this.state.word} </p>
-        <span>{this.state.word2}</span>
         <FlexView vAlignContent="center">
           <ButtonSearch  handleClick={this.handleClick} />
               </FlexView>
@@ -69,26 +69,46 @@ class App extends Component {
     );
   }
   handleChange(e) {
-    this.setState({ word: e.target.value})
+    this.setState({ word: e.target.value,
+    })
   }
   handleClick() {
-   
+    this.setState({loading: true})
     const word = this.state.word
-    axios.get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
-    .then(function(resp) {
-      console.log(resp.data);
-       playable = resp.data
-       console.log(playable)
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-    console.log(playable)
-    const words = this.state.words
-    this.setState({playable: playable,
-    words: [...this.state.words,{word: word, playable: playable}]});
+    // async function getJSONAsync(){
+
+    //   let json = axios.get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
+    //     return json;
+    //   };
+    //   let json = getJSONAsync();
+    //   console.log(json)
+    //   playable = json.data
+
+
+     axios.get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
+     .then((resp) =>{
+       console.log(resp.data);
+       this.setState({
+         loading: true,
+         playable: resp.data,
+         words: [...this.state.words, {
+           word: word,
+           playable: resp.data
+         }]
+       });
+     })
+     .then(() => this.setState({
+       loading: false,
+       word: ""
+     }))
+     .catch(function (error) {
+       console.log(error)
+     })
     
-    this.setState({word: "" });
+    
+   // this.setState(prevState => {prevState.words.push({word: word, playable: playable})})
+
+   
   }
 
 }
