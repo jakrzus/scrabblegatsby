@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {withStyles} from '@material-ui/core/styles';
-//import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 class Input extends Component {
@@ -11,7 +9,6 @@ class Input extends Component {
                     id="outlined-search"
                     label="Szukaj"
                     type="search"
-                    //className={classes.textField}
                     margin="normal"
                     variant="outlined"
                     value={this.props.word} 

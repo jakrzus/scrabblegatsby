@@ -40,7 +40,7 @@ body {
 }
 .words-card{
   margin: 2rem 2rem 2rem 2rem;
-  min-width: 300px;
+  min-width: 360px;
   min-height: 200px;
   align-items: flex-start;
 }

@@ -1,13 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
-
-import Layout from '../components/layout'
-
-import App from '../components/App'
-
+import Wrapper from '../components/Wrapper'
 
 const IndexPage = () => (
-  <App></App>
+  <Wrapper></Wrapper>
 );
 
 export default IndexPage
