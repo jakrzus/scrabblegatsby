@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
 import axios from 'axios';
+import React, {Component} from 'react';
 import Input from './input';
 import ButtonSearch from './buttonsearch';
 import Nav from './Nav';
@@ -10,6 +10,8 @@ import './layout.css';
 import NavBar from './appbar';
 import WordCard from './wordcard'
 import {withSnackbar} from 'notistack';
+
+const HEROKUAPI = 'https://secret-atoll-12425.herokuapp.com'
 
 const styles = {
     card: {
@@ -39,7 +41,8 @@ class App extends Component {
         this.state = {
             word: "",
             words: [],
-            loading: false
+            loading: false,
+            connected: false
         }
         this.handleChange = this
             .handleChange
@@ -59,7 +62,7 @@ class App extends Component {
                     <FlexView column hAlignContent="center">
                         <Card >
                             <FlexView column hAlignContent="center">
-                                <Nav className="paper"/>
+                                <Nav className="paper" connected={this.state.connected}/>
                                 <Input word={this.state.word} handleChange={this.handleChange}/>
                                 <p>
                                     {this.state.word}
@@ -75,6 +78,20 @@ class App extends Component {
             </div>
         );
     }
+    checkConnection() {
+        axios
+            .get(HEROKUAPI)
+            .then((resp) => {
+                if (resp.status === 200) {
+                    this.setState({connected: true})
+                };
+                console.log(resp.status);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+    }
     handleChange(e) {
         this.setState({word: e.target.value})
     }
@@ -83,7 +100,7 @@ class App extends Component {
         const word = this.state.word;
         var variant;
         axios
-            .get('https://secret-atoll-12425.herokuapp.com/word/check?word=' + word)
+            .get(HEROKUAPI + '/word/check?word=' + word)
             .then((resp) => {
                 console.log(resp.data);
                 resp.data
@@ -120,6 +137,9 @@ class App extends Component {
                 console.log(error)
             })
 
+    }
+    componentDidMount() {
+        this.checkConnection()
     }
 
 }
