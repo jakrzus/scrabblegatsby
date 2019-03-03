@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {withStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import {withStyles} from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 import LoadingCircle from './loadingcircle'
 const styles = theme => ({
     root: {
@@ -11,12 +11,12 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2
     }
-});
+})
 
 class Nav extends Component {
 
     render() {
-        const {classes} = this.props;
+        const {classes} = this.props
         return (
             <div>
                 <Paper className={classes.root} elevation={1} >
@@ -26,7 +26,7 @@ class Nav extends Component {
                             : (
                                 <span><LoadingCircle /></span>
                             )
-}
+                        }
                     </Typography>
                     <Typography component="p">
                         Wyszukaj słowo w słowniku języka polskiego
@@ -38,4 +38,4 @@ class Nav extends Component {
     }
 }
 
-export default withStyles(styles)(Nav);
+export default withStyles(styles)(Nav)

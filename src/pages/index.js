@@ -2,7 +2,7 @@ import React from 'react'
 import Wrapper from '../components/Wrapper'
 
 const IndexPage = () => (
-  <Wrapper></Wrapper>
-);
+    <Wrapper></Wrapper>
+)
 
 export default IndexPage

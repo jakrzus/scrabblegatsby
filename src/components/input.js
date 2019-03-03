@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react'
+import TextField from '@material-ui/core/TextField'
 
 class Input extends Component {
     render() {
         return (
-             <div>
+            <div>
                 <TextField
                     id="outlined-search"
                     label="Szukaj"
@@ -14,9 +14,9 @@ class Input extends Component {
                     value={this.props.word} 
                     onChange={this.props.handleChange}
                 />
-        </div>
-        );
+            </div>
+        )
     }
 }
 
-export default Input;
+export default Input

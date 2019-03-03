@@ -1,15 +1,15 @@
-import axios from 'axios';
-import React, {Component} from 'react';
-import Input from './input';
-import ButtonSearch from './buttonsearch';
-import Nav from './Nav';
-import Card from '@material-ui/core/Card';
-import {withStyles} from '@material-ui/core/styles';
-import FlexView from 'react-flexview';
-import './layout.css';
-import NavBar from './appbar';
+import axios from 'axios'
+import React, {Component} from 'react'
+import Input from './input'
+import ButtonSearch from './buttonsearch'
+import Nav from './Nav'
+import Card from '@material-ui/core/Card'
+import {withStyles} from '@material-ui/core/styles'
+import FlexView from 'react-flexview'
+import './layout.css'
+import NavBar from './appbar'
 import WordCard from './wordcard'
-import {withSnackbar} from 'notistack';
+import {withSnackbar} from 'notistack'
 
 const HEROKUAPI = 'https://secret-atoll-12425.herokuapp.com'
 
@@ -32,24 +32,24 @@ const styles = {
         marginTop: 'auto',
         overflow: 'visible'
     }
-};
+}
 class App extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
-            word: "",
+            word: '',
             words: [],
             loading: false,
             connected: false
         }
         this.handleChange = this
             .handleChange
-            .bind(this);
+            .bind(this)
         this.handleClick = this
             .handleClick
-            .bind(this);
+            .bind(this)
     }
     render() {
 
@@ -76,7 +76,7 @@ class App extends Component {
                     </FlexView>
                 </div>
             </div>
-        );
+        )
     }
     checkConnection() {
         axios
@@ -84,11 +84,11 @@ class App extends Component {
             .then((resp) => {
                 if (resp.status === 200) {
                     this.setState({connected: true})
-                };
-                console.log(resp.status);
+                }
+                console.log(resp.status)
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error)
             })
 
     }
@@ -97,12 +97,12 @@ class App extends Component {
     }
     handleClick() {
         this.setState({loading: true})
-        const word = this.state.word;
-        var variant;
+        const word = this.state.word
+        var variant
         axios
             .get(HEROKUAPI + '/word/check?word=' + word)
             .then((resp) => {
-                console.log(resp.data);
+                console.log(resp.data)
                 resp.data
                     ? variant = {
                         text: 'Słowo jest dozwolone w grach',
@@ -115,7 +115,7 @@ class App extends Component {
                         variant: {
                             variant: 'error'
                         }
-                    };
+                    }
                 this.setState({
                     loading: true,
                     playable: resp.data,
@@ -125,13 +125,13 @@ class App extends Component {
                             playable: resp.data
                         }
                     ]
-                });
+                })
             })
             .then(() => {
                 this
                     .props
-                    .enqueueSnackbar(variant.text, variant.variant);
-                this.setState({loading: false, word: ""})
+                    .enqueueSnackbar(variant.text, variant.variant)
+                this.setState({loading: false, word: ''})
             })
             .catch(function (error) {
                 console.log(error)
@@ -144,4 +144,4 @@ class App extends Component {
 
 }
 
-export default withSnackbar(withStyles(styles)(App));
+export default withSnackbar(withStyles(styles)(App))
