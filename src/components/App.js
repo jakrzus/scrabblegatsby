@@ -10,8 +10,11 @@ import './layout.css'
 import NavBar from './appbar'
 import WordCard from './wordcard'
 import {withSnackbar} from 'notistack'
+import {ActionCableConsumer} from 'react-actioncable-provider'
 
-const HEROKUAPI = 'https://secret-atoll-12425.herokuapp.com'
+// const HEROKUAPI = 'https://secret-atoll-12425.herokuapp.com'
+
+const HEROKUAPI = 'http://localhost:3000'
 
 const styles = {
     card: {
@@ -42,7 +45,8 @@ class App extends Component {
             word: '',
             words: [],
             loading: false,
-            connected: false
+            connected: false,
+            cableWords: []
         }
         this.handleChange = this
             .handleChange
@@ -50,9 +54,16 @@ class App extends Component {
         this.handleClick = this
             .handleClick
             .bind(this)
+        this.handleReceived = this
+            .handleReceived
+            .bind(this)
+        this.updateWords = this
+            .updateWords
+            .bind(this)
     }
     render() {
 
+        
         return (
 
             <div>
@@ -73,6 +84,8 @@ class App extends Component {
                             </FlexView>
                         </Card>
                         <WordCard words={this.state.words}/>
+                        <ActionCableConsumer channel="WordChannel" onReceived={this.handleReceived}>
+                        </ActionCableConsumer>
                     </FlexView>
                 </div>
             </div>
@@ -141,7 +154,24 @@ class App extends Component {
     componentDidMount() {
         this.checkConnection()
     }
-
+    handleReceived(data) {
+        var {id, word, correct} = data.word
+        var theWord = {id, word, correct}
+        this.setState({cableWords: [...this.state.cableWords, theWord]})
+        console.log(data)
+        this.updateWords(theWord)
+    }
+    updateWords(theWord) {
+        var {words} = this.state
+        if (words.find(word => 
+            word.id === theWord.id
+        )) {
+            return null
+        }
+        else{
+            this.setState({ words: [...words, theWord] })
+        } 
+    }
 }
 
 export default withSnackbar(withStyles(styles)(App))

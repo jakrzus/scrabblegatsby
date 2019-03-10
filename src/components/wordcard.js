@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Card from '@material-ui/core/Card';
+import Card from '@material-ui/core/Card'
 import Chip from '@material-ui/core/Chip'
 import PropTypes from 'prop-types'
 import {Mood, MoodBad} from '@material-ui/icons'
@@ -17,7 +17,7 @@ const styles = {
         background: 'red',
         margin: '0.4rem 0.2rem 0.2rem 0.4rem'
     }
-};
+}
 class WordCard extends Component {
     render() {
         return (
@@ -30,21 +30,22 @@ class WordCard extends Component {
                             {(word.playable || word.playable === false) && <WordChip key={word} word={word}/>}
 
                         </div>)
-}</Card >
+                    }</Card >
             </div>
         )
     }
 }
 
 class WordChip extends Component {
-
+    
     render() {
-        const playable = this.props.word.playable;
-        var color;
-        var icon;
+        const { word } = this.props
+        const playable = word.playable
+        var color
+        var icon
         playable
             ? color = styles.chipwin
-            : color = styles.chiploose;
+            : color = styles.chiploose
         playable
             ? icon = <Mood/>
             : icon = <MoodBad/>
@@ -56,15 +57,12 @@ class WordChip extends Component {
                     style={color}
                     clickable={true}
                     onDelete={() => {}}
-                    key={this.props.word}
+                    key={word.id}
                     icon={icon}
-                    label={this.props.word.word}/>
+                    label={word.word}/>
             </div>
         )
     }
 
 }
-WordChip.propTypes = {
-    word: PropTypes.shape({word: PropTypes.text, playable: PropTypes.bool.isRequired})
-}
-export default WordCard;
+export default WordCard
