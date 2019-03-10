@@ -46,19 +46,24 @@ class App extends Component {
             words: [],
             loading: false,
             connected: false,
-            cableWords: []
+            cableWords: [],
+            game_sessions: [],
+            game_session: ''
         }
         this.handleChange = this
             .handleChange
             .bind(this)
-        this.handleClick = this
-            .handleClick
+        this.handleWordClick = this
+            .handleWordClick
             .bind(this)
         this.handleReceived = this
             .handleReceived
             .bind(this)
         this.updateWords = this
             .updateWords
+            .bind(this)
+        this.fetchGameSessions = this
+            .fetchGameSessions
             .bind(this)
     }
     render() {
@@ -79,7 +84,7 @@ class App extends Component {
                                     {this.state.word}
                                 </p>
                                 <FlexView vAlignContent="center">
-                                    <ButtonSearch handleClick={this.handleClick}/>
+                                    <ButtonSearch handleClick={this.handleWordClick}/>
                                 </FlexView>
                             </FlexView>
                         </Card>
@@ -108,7 +113,7 @@ class App extends Component {
     handleChange(e) {
         this.setState({word: e.target.value})
     }
-    handleClick() {
+    handleWordClick() {
         this.setState({loading: true})
         const word = this.state.word
         var variant
@@ -151,8 +156,16 @@ class App extends Component {
             })
 
     }
+    fetchGameSessions(){
+        axios.get(HEROKUAPI + '/game_sessions/index')
+            .then(resp => {
+                console.table(resp.data)
+                this.setState({game_sessions: resp.data})})
+            .catch(error => {console.log(error)})
+    }
     componentDidMount() {
         this.checkConnection()
+        this.fetchGameSessions()
     }
     handleReceived(data) {
         var {id, word, correct} = data.word
