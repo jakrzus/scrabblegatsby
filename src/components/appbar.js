@@ -35,7 +35,6 @@ export default class NavBar extends Component {
         )
     }
     handleChange(e){
-        //this.props.setGameSession(e.target.value)
         this.props.setGameSession(e.target.value)
     }
 }

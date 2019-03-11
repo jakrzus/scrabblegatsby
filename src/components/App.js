@@ -121,8 +121,10 @@ class App extends Component {
         this.fetchWords(id)
     }
     fetchWords(game_session_id){
-        axios.get(HEROKUAPI + '/game_sessions/open?=' + game_session_id)
-            .then(resp => {this.setState({words: resp.data.words})})
+        axios.get(HEROKUAPI + '/game_sessions/open?id=' + game_session_id)
+            .then(resp => {
+                this.setState({words: resp.data.words})
+            })
     }
     handleChange(e) {
         this.setState({word: e.target.value})
@@ -199,6 +201,7 @@ class App extends Component {
         // else{
         //     this.setState({ words: [...words, theWord] })
         // } 
+        //TODO Fix it
         this.setState({words: [...this.state.words, theWord ]})
     }
 }
