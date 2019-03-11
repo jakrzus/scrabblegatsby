@@ -25,7 +25,7 @@ export default class NavBar extends Component {
                         <Select value={game_session} onChange={this.handleChange}>
                             {this.props.gameSessions.map((session) => 
                                 <MenuItem key={session.id} value={session.id}>
-                                    {session.id}
+                                    {session.created_at}
                                 </MenuItem>
                             )}
                         </Select>

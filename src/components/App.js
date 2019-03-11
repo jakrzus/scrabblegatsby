@@ -177,12 +177,17 @@ class App extends Component {
             .then(resp => {
                 console.table(resp.data)
                 this.setState({game_sessions: resp.data})})
+            .then(() => {
+                var { game_sessions } = this.state
+                var id = game_sessions[game_sessions.length - 1].id
+                this.setGameSession(id)})
             .catch(error => {console.log(error)})
     }
 
     componentDidMount() {
         this.checkConnection()
         this.fetchGameSessions()
+        
     }
     handleReceived(data) {
         var {id, word, correct} = data
