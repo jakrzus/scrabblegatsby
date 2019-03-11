@@ -65,6 +65,11 @@ class App extends Component {
         this.fetchGameSessions = this
             .fetchGameSessions
             .bind(this)
+        this.setGameSession = this
+            .setGameSession.bind(this)
+        this.fetchWords = this
+            .fetchWords
+            .bind(this)
     }
     render() {
 
@@ -72,7 +77,7 @@ class App extends Component {
         return (
 
             <div>
-                <NavBar/>
+                <NavBar gameSessions={this.state.game_sessions} setGameSession={this.setGameSession} game_session={this.state.game_session} fetchWords={this.state.fetchWords}/>
                 <div className="App center">
                     {this.state.loading && <div className={'loader'}>Sprawdzam...</div>}
                     <FlexView column hAlignContent="center">
@@ -110,6 +115,15 @@ class App extends Component {
             })
 
     }
+    setGameSession(id){
+      
+        this.setState({game_session: id})
+        this.fetchWords(id)
+    }
+    fetchWords(game_session_id){
+        axios.get(HEROKUAPI + '/game_sessions/open?=' + game_session_id)
+            .then(resp => {this.setState({words: resp.data.words})})
+    }
     handleChange(e) {
         this.setState({word: e.target.value})
     }
@@ -136,11 +150,11 @@ class App extends Component {
                     }
                 this.setState({
                     loading: true,
-                    playable: resp.data,
+                    correct: resp.data,
                     words: [
                         ...this.state.words, {
                             word: word,
-                            playable: resp.data
+                            correct: resp.data
                         }
                     ]
                 })
@@ -163,27 +177,29 @@ class App extends Component {
                 this.setState({game_sessions: resp.data})})
             .catch(error => {console.log(error)})
     }
+
     componentDidMount() {
         this.checkConnection()
         this.fetchGameSessions()
     }
     handleReceived(data) {
-        var {id, word, correct} = data.word
+        var {id, word, correct} = data
         var theWord = {id, word, correct}
         this.setState({cableWords: [...this.state.cableWords, theWord]})
         console.log(data)
         this.updateWords(theWord)
     }
     updateWords(theWord) {
-        var {words} = this.state
-        if (words.find(word => 
-            word.id === theWord.id
-        )) {
-            return null
-        }
-        else{
-            this.setState({ words: [...words, theWord] })
-        } 
+        // var {words} = this.state
+        // if (words.find(word => 
+        //     word.id === theWord.id
+        // )) {
+        //     return null
+        // }
+        // else{
+        //     this.setState({ words: [...words, theWord] })
+        // } 
+        this.setState({words: [...this.state.words, theWord ]})
     }
 }
 

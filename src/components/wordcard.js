@@ -27,7 +27,7 @@ class WordCard extends Component {
                         .props
                         .words
                         .map((word) => <div>
-                            {(word.playable || word.playable === false) && <WordChip key={word} word={word}/>}
+                            {(word.correct || word.correct === false) && <WordChip key={word} word={word}/>}
 
                         </div>)
                     }</Card >
@@ -40,13 +40,13 @@ class WordChip extends Component {
     
     render() {
         const { word } = this.props
-        const playable = word.playable
+        const correct = word.correct
         var color
         var icon
-        playable
+        correct
             ? color = styles.chipwin
             : color = styles.chiploose
-        playable
+        correct
             ? icon = <Mood/>
             : icon = <MoodBad/>
 
