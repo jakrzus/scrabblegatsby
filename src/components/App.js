@@ -97,8 +97,13 @@ class App extends Component {
                             </FlexView>
                         </Card>
                         <WordCard words={this.state.words}/>
-                        <ActionCableConsumer channel="WordChannel" onReceived={this.handleReceived}>
+                        <ActionCableConsumer 
+                            channel={{ 
+                                channel: 'GameSessionChannel', 
+                                id: this.state.game_session }} 
+                            onReceived={this.handleReceived}>
                         </ActionCableConsumer>
+                        
                     </FlexView>
                 </div>
             </div>
