@@ -46,7 +46,7 @@ class App extends Component {
             words: [],
             loading: false,
             connected: false,
-            cableWords: [],
+            cableWord: {},
             game_sessions: [],
             game_session: ''
         }
@@ -126,7 +126,7 @@ class App extends Component {
     fetchWords(game_session_id){
         axios.get(HEROKUAPI + '/game_sessions/open?id=' + game_session_id)
             .then(resp => {
-                this.setState({words: resp.data.words})
+                this.setState({words: resp.data})
             })
     }
     handleChange(e) {
@@ -159,13 +159,14 @@ class App extends Component {
                     }
                 this.setState({
                     loading: true,
-                    correct: resp.data,
-                    words: [
-                        ...this.state.words, {
-                            word: word,
-                            correct: resp.data
-                        }
-                    ]
+                    correct: resp.data
+                    // ,
+                    // words: [
+                    //     ...this.state.words, {
+                    //         word: word,
+                    //         correct: resp.data
+                    //     }
+                    // ]
                 })
             })
             .then(() => {
@@ -203,13 +204,12 @@ class App extends Component {
         
     }
     handleReceived(data) {
-        var {id, word, correct} = data
-        var theWord = {id, word, correct}
-        this.setState({cableWords: [...this.state.cableWords, theWord]})
+        var {word} = data
+        this.setState({cableWord: word})
         console.log(data)
-        this.updateWords(theWord)
+        this.updateWords(word)
     }
-    updateWords(theWord) {
+    updateWords(word) {
         // var {words} = this.state
         // if (words.find(word => 
         //     word.id === theWord.id
@@ -220,7 +220,7 @@ class App extends Component {
         //     this.setState({ words: [...words, theWord] })
         // } 
         //TODO Fix it
-        this.setState({words: [...this.state.words, theWord ]})
+        this.setState({words: [...this.state.words, word ]})
     }
 }
 
