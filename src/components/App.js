@@ -12,9 +12,9 @@ import WordCard from './wordcard'
 import {withSnackbar} from 'notistack'
 import {ActionCableConsumer} from 'react-actioncable-provider'
 
-// const HEROKUAPI = 'https://secret-atoll-12425.herokuapp.com'
+const HEROKUAPI = 'https://secret-atoll-12425.herokuapp.com'
 
-const HEROKUAPI = 'http://localhost:3000'
+const LOCALAPI = 'http://localhost:3000'
 
 const styles = {
     card: {
@@ -129,7 +129,8 @@ class App extends Component {
         this.fetchWords(id)
     }
     fetchWords(game_session_id){
-        axios.get(HEROKUAPI + '/game_sessions/open?id=' + game_session_id)
+        axios.get(HEROKUAPI + '/game_sessions/open',
+            {params:{id: game_session_id}})
             .then(resp => {
                 this.setState({words: resp.data})
             })

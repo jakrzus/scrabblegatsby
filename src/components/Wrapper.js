@@ -5,7 +5,9 @@ import ActionCable from 'actioncable'
 import ActionCableProvider from 'react-actioncable-provider'
 
 
-const cable = ActionCable.createConsumer('ws://localhost:3000/cable') 
+const HEROKU_CABLE = 'https://secret-atoll-12425.herokuapp.com/cable'
+const LOCAL_CABLE = 'ws://localhost:3000/cable'
+const cable = ActionCable.createConsumer(HEROKU_CABLE) 
 export default class Wrapper extends Component {
     render() {
         return (
