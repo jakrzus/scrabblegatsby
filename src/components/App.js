@@ -70,6 +70,9 @@ class App extends Component {
         this.fetchWords = this
             .fetchWords
             .bind(this)
+        this.createGameSession= this
+            .createGameSession
+            .bind(this)
     }
     render() {
 
@@ -77,7 +80,7 @@ class App extends Component {
         return (
 
             <div>
-                <NavBar gameSessions={this.state.game_sessions} setGameSession={this.setGameSession} game_session={this.state.game_session} fetchWords={this.state.fetchWords}/>
+                <NavBar gameSessions={this.state.game_sessions} setGameSession={this.setGameSession} game_session={this.state.game_session} fetchWords={this.state.fetchWords} createGameSession={this.createGameSession}/>
                 <div className="App center">
                     {this.state.loading && <div className={'loader'}>Sprawdzam...</div>}
                     <FlexView column hAlignContent="center">
@@ -132,9 +135,13 @@ class App extends Component {
     handleWordClick() {
         this.setState({loading: true})
         const word = this.state.word
+        const game_session_id = this.state.game_session
         var variant
         axios
-            .get(HEROKUAPI + '/word/check?word=' + word)
+            .get(HEROKUAPI + '/word/check', {params:{
+                word: word,
+                game_session_id: game_session_id
+            }})
             .then((resp) => {
                 console.log(resp.data)
                 resp.data
@@ -183,7 +190,13 @@ class App extends Component {
                 this.setGameSession(id)})
             .catch(error => {console.log(error)})
     }
-
+    createGameSession(){
+        axios.get(HEROKUAPI + '/game_sessions/create')
+            .then((resp) => {this.fetchGameSessions()
+                console.log(resp)}
+            )
+            .catch(error => {console.log(error)})
+    }
     componentDidMount() {
         this.checkConnection()
         this.fetchGameSessions()
